@@ -76,6 +76,10 @@ class ConfigurableJsonSlurper {
      * @return a data structure of lists and maps
      */
     public Object parseText(String text) {
+        // if start with "\uFEFF", delete it
+        if (text.startsWith("\uFEFF")) {
+            text = text.substring(1);
+        }
         if (text == null || text.length() == 0) {
             throw new IllegalArgumentException("The JSON input text should neither be null nor empty.");
         }
